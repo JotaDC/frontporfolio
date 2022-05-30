@@ -1,0 +1,56 @@
+<div class="container-fluid">
+  <h1>Iniciar Sesión</h1>
+  <div class="row" >
+    <div class="col-md">
+        <div class="card bg-success text-white">
+          <div class="card-body">
+            <h4 class="card-title">Login</h4>
+            <p class="card-text"></p>
+            <form [formGroup]="form" (ngSubmit)="onEnviar($event)">
+              <div class="mb-3">
+                <label for="exampleInputUsuario" class="form-label">Usuario</label>
+                <input type="text" formControlName="username"
+                [ngClass]="{
+                  'is-invalid':Usuario?.errors && Usuario?.touched,
+                  'is-valid':!Usuario?.errors && Usuario?.touched}"
+                class="form-control" id="exampleInputUsuario" aria-describedby="usuarioHelp">
+                <div *ngIf="Usuario?.errors && Usuario?.touched">
+                  <p *ngIf="Usuario?.hasError('required')" class="text-danger">
+                    El Usuario es requerido.
+                  </p>
+                  <p *ngIf="Usuario?.hasError('usuario')" class="text-danger">
+                    El formato del Usuario debe ser válido.
+                  </p>
+                </div>
+              </div>
+              <div class="mb-3">
+                <label for="exampleInputPassword1" class="form-label">Password</label>
+                <input type="password" formControlName="password"
+                [ngClass]="{
+                  'is-invalid':Password?.errors && Password?.touched,
+                  'is-valid':!Password?.errors && Password?.touched}"
+                class="form-control" id="exampleInputPassword1">
+                <div *ngIf="Password?.errors && Password?.touched">
+                  <p *ngIf="Password?.hasError('required')" class="text-danger">
+                    El Password es requerido.
+                  </p>
+                  <p *ngIf="Password?.errors?.['minlength']" class="text-danger">
+                    El Password debe ser de 8 o mas caracteres.
+                  </p>
+                </div>
+              </div>
+
+              <button type="submit" class="btn btn-primary">Enviar</button>
+              <button [routerLink]="['/porfolio']"type="button" class="btn btn-primary">Cancelar</button>
+            </form>
+            <!--<a href="#" class="btn btn-primary">Entrar</a>-->
+
+          </div>
+        </div>
+    </div>
+
+
+  </div>
+</div>
+
+

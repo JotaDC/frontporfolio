@@ -1,0 +1,42 @@
+<div class="card" class="encabezado">
+  <div class="row">
+  <div class="col" >
+    <img  src="./assets/imagenes/logoarprograma.png"
+    class="img-fluid logoprogramar" alt="logoarprograma">
+    <img  src="./assets/imagenes/logosministerio.png"
+    class="img-fluid logoministerio" alt="logoarprograma">
+  </div>
+  <div class="col" style="margin-top: 25px;">
+    <div class="botones-cabecera">
+      <button [hidden]="true"type="button"
+      class="btn btn-warning  me-2 flotanteDerecha">Sign-up</button>
+      <button *ngIf=" ver()==false"[routerLink]="['/iniciar-sesion']" type="button"
+      class="btn btn-outline-light  me-2 flotanteDerecha" >Login</button>
+    </div>
+    <div class="botones-cabecera">
+      <button [hidden]="true"type="button"
+      class="btn btn-warning  me-2 flotanteDerecha">Sign-up</button>
+      <button *ngIf=" ver()==true"(click)="cerrar()" type="button"
+      class="btn btn-outline-light  me-2 flotanteDerecha" >LogOut</button>
+
+
+    </div>
+    <div class="social flotanteDerecha">
+
+      <a type="botton" target="_blank" href="https://www.facebook.com/javier.dario.397/">
+        <i class="h3 fa-brands fa-facebook me-1" style="color:rgb(255, 255, 255)"></i>
+      </a>
+      <a type="botton" target="_blank" href="https://github.com/JotaDC">
+        <i class="h3 fa-brands fa-github me-1 " style="color:rgb(255, 255, 255)"></i>
+      </a>
+      <a type="botton" target="_blank" href="https://twitter.com/JavierCanete72">
+        <i class=" h3 fa-brands fa-twitter me-4 " style="color:rgb(255, 255, 255)"></i>
+      </a>
+
+
+    </div>
+  </div>
+  <div class="finFlotante"><br></div>
+</div>
+
+

@@ -1,0 +1,344 @@
+<div class="row">
+  <div class="col-sm-3" >
+    <div class="card" >
+      <div class="card-body">
+        <h1 class="card-title">Experiencia</h1>
+      </div>
+    </div>
+  </div>
+  <div class="col-sm-9" >
+    <div class="card finFlotante" >
+      <div class="card-body " >
+        <button type="button" class="btn btn-success" data-toggle="modal" data-target="#agregarExperienciaModal" [hidden]="!usuarioActual" (click)="onOpenModal('agregar')">
+          <a class="nav-link" style="color:rgb(220, 232, 243)">
+            AGREGAR EXPERIENCIA<span class="sr-only">(current)</span>
+          </a>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row"  id="item" *ngFor="let exp of experiencia">
+  <div class="col-sm-3" >
+    <div class="card" >
+      <div class="card-body ">
+        <img *ngIf="exp.imagenExp" height="150" width="250" alt="" [src]="exp.imagenExp" class="img-fluid imagen-seccion" />
+      </div>
+    </div>
+  </div>
+  <div class="col-sm-9" >
+    <div class="card">
+      <div class="card-body">
+        <h3 >{{exp.empresaExp}}
+          <a type="button" (click)="onOpenModal('editar',exp)">
+            <i type="button" data-toggle="modal" data-target="#editarExperienciaModal" onMouseOut="this.style.color='#FFF'" onMouseOver="this.style.color='#0F0'" style="cursor:pointer" [hidden]="!usuarioActual" class="fa-solid fa-pen h5 ms-2 me-1"></i>
+          </a>
+          <a type="botton" (click)="onOpenModal('borrar',exp)">
+            <i type="button" data-toggle="modal" data-target="#borrarExperienciaModal" onMouseOut="this.style.color='#FFF'" onMouseOver="this.style.color='#0F0'" style="cursor:pointer" [hidden]="!usuarioActual" class="fa-solid fa-circle-minus h5">
+            </i>
+          </a>
+          <p>{{exp.periodoExp}}</p>
+          <p>{{exp.puestoExp}}</p>
+          <p>{{exp.descExp}}</p>
+        </h3>
+
+
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!--Notificacion que no hay items-->
+<div *ngIf="experiencia.length==0" class="col-lg-12 col-md-12 col-xl-12">
+  <div class="alert alert-info" role="alert">
+    <h4 class="alert-heading">No hay ningún Item!</h4>
+    <p>No se encontro ningun item.</p>
+  </div>
+</div>
+
+
+<!-- Modal Añadir -->
+<div
+  class="modal fade card-body card-text"
+
+  id="agregarExperienciaModal"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="agregarEducacionModalLabel"
+  aria-hidden="true"
+  >
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header" >
+        <h5 class="modal-title" id="agregarEducacionModalLabel">Añandir Educacion</h5>
+        <button
+          type="button"
+          class="close"
+          data-dismiss="modal"
+          aria-label="Close"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body card-body card-text">
+        <form #addForm='ngForm' (ngSubmit)="onAgregarExperiencia(addForm)">
+        <!--<form [formGroup]="formEducacion" (submit)="onAgregarEducacion">
+        -->
+          <div class="form-group">
+            <label for="empresaExp">Empresa</label>
+            <input
+                type="text"
+                ngModel
+                name="empresaExp"
+                class="form-control"
+                id="institutoEdu"
+                placeholder="Empresa"
+                required
+            />
+          </div>
+          <div class="form-group">
+            <label for="puestoExp">Puesto</label>
+            <input
+                type="text"
+                ngModel
+                name="puestoExp"
+                class="form-control"
+                id="puestoExp"
+                placeholder="Puesto"
+                required
+            />
+          </div>
+          <div class="form-group">
+            <label for="PeriodoExp">Periodo</label>
+            <input
+                type="text"
+                ngModel
+                name="PeriodoExp"
+                class="form-control"
+                id="PeriodoExp"
+                placeholder="Periodo"
+                required
+            />
+          </div>
+          <div class="form-group">
+            <label for="descExp">Descripción</label>
+            <input
+                type="text"
+                ngModel
+                name="descExp"
+                class="form-control"
+                id="descExp"
+                placeholder="Descripción"
+                required
+            />
+          </div>
+
+          <div class="form-group">
+            <label for="imagenExp">Imagen</label>
+            <input
+                type="text"
+                ngModel name="imagenExp"
+                class="form-control"
+                id="imagenExp"
+                placeholder="Imagen"
+
+            />
+          </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              id="agregar-experiencia-form"
+              class="btn btn-secondary"
+              data-dismiss="modal"
+            >
+              Cancelar
+            </button>
+            <button
+              [disabled]="addForm.invalid"
+              type="submit"
+              class="btn btn-primary"
+            >
+              Guardar
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal Editar -->
+<div
+  class="modal fade"
+  id="editarExperienciaModal"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="editarEducacionModalLabel"
+  aria-hidden="true"
+
+>
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header" >
+        <h5 class="modal-title" id="editarEducacionModalLabel">
+          Editar Educacion {{editarExperiencia?.empresaExp}}
+        </h5>
+        <button
+          type="button"
+          class="close"
+          data-dismiss="modal"
+          aria-label="Close"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form #editForm="ngForm">
+
+          <div class="form-group">
+            <label for="empresaExp">Empresa</label>
+            <input type="text"
+                ngModel="{{editarExperiencia?.empresaExp}}"
+                name="empresaExp"
+                class="form-control"
+                id="empresaExp"
+                aria-describedby="emailHelp"
+                placeholder="Empresa"
+
+            />
+          </div>
+          <input
+            type="hidden"
+            ngModel="{{editarExperiencia?.idExp}}"
+            name="idExp"
+            class="form-control"
+            id="idExp"
+            placeholder=""
+          />
+          <div class="form-group">
+            <label for="puestoExp">Puesto</label>
+            <input type="text"
+                ngModel="{{editarExperiencia?.puestoExp}}"
+                name="puestoExp"
+                class="form-control"
+                id="puestoExp"
+                placeholder="Puesto"
+
+            />
+          </div>
+          <div class="form-group">
+            <label for="descExp">Descripción</label>
+            <input type="text"
+                ngModel="{{editarExperiencia?.descExp}}"
+                name="descExp"
+                class="form-control"
+                id="descExp"
+                placeholder="Descripción"
+
+            />
+          </div>
+          <div class="form-group">
+            <label for="periodoExp">Periodo</label>
+            <input type="text"
+                ngModel="{{editarExperiencia?.periodoExp}}"
+                name="periodoExp"
+                class="form-control"
+                id="periodoExp"
+                placeholder="Periodo"
+
+            />
+          </div>
+
+          <div class="form-group">
+            <label for="imagenExp">Imagen</label>
+            <input type="text"
+              ngModel="{{editarExperiencia?.imagenExp}}"
+                name="imagenExp"
+                class="form-control"
+                id="imagenExp"
+                placeholder="Imagen"
+
+            />
+          </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              id=""
+              data-dismiss="modal"
+              class="btn btn-secondary"
+
+            >
+            Cerrar
+            </button>
+            <button
+              type="button"
+              (click)="onEditarExperiencia(editForm.value)"
+              data-dismiss="modal"
+              class="btn btn-primary"
+            >
+            Grabar Cambios
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- Borrar -->
+
+<div
+  data-bs-toggle="modal" data-bs-target="#borrarModelLabel"
+  class="modal fade"
+  id="borrarExperienciaModal"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="borrarBorrarModalLabel"
+  aria-hidden="true"
+
+>
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header" >
+        <h5 class="modal-title" id="borrarExperienciaModalLabel">
+          Borrar Experiencia
+        </h5>
+        <button
+          type="button"
+          class="close"
+          data-dismiss="modal"
+          aria-label="Close"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p style="color:black">
+          ¿Estas seguro de borrar
+          {{borrarExperiencia?.empresaExp}}?
+        </p>
+        <div class="modal-footer">
+          <button
+            type="button"
+            class="btn btn-secondary"
+            data-dismiss="modal"
+          >
+            No
+          </button>
+          <button
+            type="button"
+            (click)="onBorrarExperiencia(borrarExperiencia!.idExp)"
+            class="btn btn-danger"
+            data-dismiss="modal"
+          >
+            Si
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+

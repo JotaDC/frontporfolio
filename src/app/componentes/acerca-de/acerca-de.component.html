@@ -1,0 +1,178 @@
+<div class="card" *ngIf="usuario">
+
+  <img *ngIf="usuario.fotoFondo ; else elseBlock" [src]="usuario.fotoFondo" class="img-fluid banner" alt="" />
+  <ng-template #elseBlock>
+    <img  src="https://shorturl.ae/Fl41x" class="img-fluid banner" alt="banner" />
+  </ng-template>
+  <div id="seccion" >
+    <div class="col" >
+      <div class="fondo-banner">
+
+          <img  *ngIf="usuario.fotoPerfil ; else elseBlock2" [src]="usuario.fotoPerfil" class="img-fluid foto-usuario" alt="" />
+          <ng-template #elseBlock2>
+            <img class="img-fluid foto-usuario" alt="foto usuario" src="https://acortar.link/rgNORB" />
+          </ng-template>
+        </div>
+      <!--
+    <div class="col flotanteDerecha boton-menu">
+          <button type="button" click="#habil">Acerca de</button>
+          <button type="button">Experiencia</button>
+          <button type="button">Educación</button>
+          <button type="button">Habilidades</button>
+          <button type="button">Proyectos</button>
+    </div>
+    -->
+  </div>
+  <div  class="row">
+    <div class="col-3" >
+      <div  class="nombre h5">
+        {{usuario.nombre}} {{usuario.apellido}}
+        <!--
+        <a [routerLink]="['/editar-datos']"><i  [hidden]="!usuarioActual" class="fa-solid fa-pen h4"></i></a>
+        -->
+        <a type="button" (click)="onOpenModal('datos',usuario)">
+          <i type="button" data-toggle="modal" data-target="#editarDatosModal" onMouseOut="this.style.color='#fff'" onMouseOver="this.style.color='#0F0'" style="cursor:pointer" [hidden]="!usuarioActual" class="fa-solid fa-pen h5 ms-2 me-1"></i>
+        </a>
+      </div>
+      <div class="titulo h6">
+        {{usuario.titulo}}
+      </div>
+    </div>
+    <div class="col">
+      <div class="titulo-acercaDe">
+        <span class="inicioFlotante "><h1>Acerca de </h1></span><span class="finFlotante"></span>
+
+        <p class="cortarFlotante">{{usuario.descripcion}}</p>
+      </div>
+    </div>
+  </div>
+  <div class=".finFlotante"><br></div>
+</div>
+
+<!-- modal -->
+<div
+  class="modal fade"
+  id="editarDatosModal"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="editarDatosModalLabel"
+  aria-hidden="true"
+
+>
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="editarDatosModalLabel">
+          Editar Datos de {{editUsuario?.apellido}}
+        </h5>
+        <button
+          type="button"
+          class="close"
+          data-dismiss="modal"
+          aria-label="Close"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form #editForm="ngForm">
+
+          <div class="form-group">
+            <label for="institutoEdu">Apellido</label>
+            <input type="text"
+                ngModel="{{editUsuario?.apellido}}"
+                name="apellido"
+                class="form-control"
+                id="apellido"
+                aria-describedby="apellidoDatosHelp"
+                placeholder="Apellido"
+
+            />
+          </div>
+          <input
+            type="hidden"
+            ngModel="{{editUsuario?.id}}"
+            name="id"
+            class="form-control"
+            id="id"
+            placeholder=""
+          />
+          <div class="form-group">
+            <label for="nombre">Nombre</label>
+            <input type="text"
+                ngModel="{{editUsuario?.nombre}}"
+                name="nombre"
+                class="form-control"
+                id="nombre"
+                placeholder="Nombre"
+
+            />
+          </div>
+          <div class="form-group">
+            <label for="titulo">Titulo</label>
+            <input type="text"
+                ngModel="{{editUsuario?.titulo}}"
+                name="titulo"
+                class="form-control"
+                id="titulo"
+                placeholder="Titulo"
+
+            />
+          </div>
+          <div class="form-group">
+            <label for="descripcion">Descripción</label>
+            <input type="text"
+                ngModel="{{editUsuario?.descripcion}}"
+                name="descripcion"
+                class="form-control"
+                id="descripcion"
+                placeholder="Descripción"
+
+            />
+          </div>
+          <div class="form-group">
+            <label for="fotoPerfil">Foto del Perfil</label>
+            <input type="text"
+                ngModel="{{editUsuario?.fotoPerfil}}"
+                name="fotoPerfil"
+                class="form-control"
+                id="fotoPerfil"
+                placeholder="Foto del Perfil"
+
+            />
+          </div>
+          <div class="form-group">
+            <label for="fotoFondo">Foto de Fondo</label>
+            <input type="text"
+              ngModel="{{editUsuario?.fotoFondo}}"
+                name="fotoFondo"
+                class="form-control"
+                id="fotoFondo"
+                placeholder="Foto de Fondo"
+
+            />
+          </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              id=""
+              data-dismiss="modal"
+              class="btn btn-secondary"
+
+            >
+            Cerrar
+            </button>
+            <button
+              type="button"
+              (click)="onEditarUsuario(editForm.value)"
+              data-dismiss="modal"
+              class="btn btn-primary"
+            >
+            Grabar Cambios
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

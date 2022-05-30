@@ -1,0 +1,312 @@
+<div class="row">
+  <div class="col-sm-3" >
+    <div class="card" >
+      <div class="card-body">
+        <h1 class="card-title">Habilidades</h1>
+      </div>
+    </div>
+  </div>
+  <div class="col-sm-9" >
+    <div class="card finFlotante" >
+      <div class="card-body " >
+        <button type="button" class="btn btn-success" data-toggle="modal" data-target="#agregarHabilidadModal" [hidden]="!usuarioActual" (click)="onOpenModal('agregar')">
+          <a class="nav-link" style="color:rgb(220, 232, 243)">
+            AGREGAR HABILIDAD<span class="sr-only">(current)</span>
+          </a>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row"  id="item"  >
+  <div >
+    <div class="card" >
+      <div class="card-body ">
+
+      </div>
+    </div>
+  </div>
+  <div class="col-sm-4" *ngFor="let hab of habilidad">
+    <div class="card">
+      <div class="card-body">
+        <h3>
+
+          <img alt="" height="50" width="50" alt=" " [src]="hab.fotoSkill" class="img-fluid imagen-seccion" />
+          {{hab.nombreSkill}}
+
+          <div
+          name="barraProgreso"
+          class="RadialProgress disabled "
+          role="progressbar"
+          aria-valuenow="25"
+          aria-valuemin="0"
+          aria-valuemax="100"
+        ></div>
+        {{hab.porcentaje}}%
+        <input type="range" value={{hab.porcentaje}} min="0" max="100" />
+
+          <a type="button" (click)="onOpenModal('editar',hab)">
+            <i type="button" data-toggle="modal" data-target="#editarHabilidadModal" onMouseOut="this.style.color='#FFF'" onMouseOver="this.style.color='#0F0'" style="cursor:pointer" [hidden]="!usuarioActual" class="fa-solid fa-pen h5 ms-2 me-1"></i>
+          </a>
+          <a type="botton" (click)="onOpenModal('borrar',hab)">
+            <i type="button" data-toggle="modal" data-target="#borrarHabilidadModal" onMouseOut="this.style.color='#FFF'" onMouseOver="this.style.color='#0F0'" style="cursor:pointer" [hidden]="!usuarioActual" class="fa-solid fa-circle-minus h5">
+            </i>
+          </a>
+        </h3>
+
+
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!--Notificacion que no hay items-->
+<div *ngIf="habilidad.length==0" class="col-lg-12 col-md-12 col-xl-12">
+  <div class="alert alert-info" role="alert">
+    <h4 class="alert-heading">No hay ningún Item!</h4>
+    <p>No se encontro ningun item.</p>
+  </div>
+</div>
+
+
+
+<!-- Modal Añadir -->
+<div
+  class="modal fade card-body card-text"
+
+  id="agregarHabilidadModal"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="agregarHabilidadModalLabel"
+  aria-hidden="true"
+  >
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="agregarHabilidadModalLabel">Añandir Habilidad</h5>
+        <button
+          type="button"
+          class="close"
+          data-dismiss="modal"
+          aria-label="Close"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body card-body card-text">
+        <form #addForm='ngForm' (ngSubmit)="onAgregarHabilidad(addForm)">
+        <!--<form [formGroup]="formEducacion" (submit)="onAgregarEducacion">
+        -->
+          <div class="form-group">
+            <label for="nombreSkill">Nombre</label>
+            <input
+                type="text"
+                ngModel
+                name="nombreSkill"
+                class="form-control"
+                id="nombreSkill"
+                placeholder="Nombre"
+                required
+            />
+          </div>
+          <div class="form-group">
+            <label for="porcentaje">Porcentaje</label>
+            <input
+                type="text"
+                ngModel
+                name="porcentaje"
+                class="form-control"
+                id="porcentaje"
+                placeholder="Porcentaje"
+                required
+            />
+          </div>
+
+          <div class="form-group">
+            <label for="fotoSkill">Imagen</label>
+            <input
+                type="text"
+                ngModel name="fotoSkill"
+                class="form-control"
+                id="fotoSkill"
+                placeholder="Imagen"
+
+            />
+          </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              id="agregar-habilidad-form"
+              class="btn btn-secondary"
+              data-dismiss="modal"
+            >
+              Cancelar
+            </button>
+            <button
+              [disabled]="addForm.invalid"
+              type="submit"
+              class="btn btn-primary"
+            >
+              Guardar
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal Editar -->
+<div
+  class="modal fade"
+  id="editarHabilidadModal"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="editarHabilidadModalLabel"
+  aria-hidden="true"
+
+>
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header" >
+        <h5 class="modal-title" id="editarHabilidadModalLabel">
+          Editar Habilidad {{editarHabiliadad?.nombreSkill}}
+        </h5>
+        <button
+          type="button"
+          class="close"
+          data-dismiss="modal"
+          aria-label="Close"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form #editForm="ngForm">
+          <div class="form-group">
+            <label for="nombreSkill">Nombre</label>
+            <input type="text"
+                ngModel="{{editarHabiliadad?.nombreSkill}}"
+                name="nombreSkill"
+                class="form-control"
+                id="nombreSkill"
+                aria-describedby="nombreSkillHelp"
+                placeholder="Nombre"
+
+            />
+          </div>
+          <div class="form-group">
+            <label for="porcentaje">Porcentaje</label>
+            <input type="text"
+                ngModel="{{editarHabiliadad?.porcentaje}}"
+                name="porcentaje"
+                class="form-control"
+                id="porcentaje"
+                aria-describedby="porcentejeHelp"
+                placeholder="Porcentaje"
+
+            />
+          </div>
+          <input
+            type="hidden"
+            ngModel="{{editarHabiliadad?.idSkill}}"
+            name="idSkill"
+            class="form-control"
+            id="idSkill"
+            placeholder=""
+          />
+
+
+          <div class="form-group">
+            <label for="fotoSkill">Foto</label>
+            <input type="text"
+              ngModel="{{editarHabiliadad?.fotoSkill}}"
+                name="fotoSkill"
+                class="form-control"
+                id="fotoSkill"
+                placeholder="Foto"
+
+            />
+          </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              id=""
+              data-dismiss="modal"
+              class="btn btn-secondary"
+
+            >
+            Cerrar
+            </button>
+            <button
+              type="button"
+              (click)="onEditarHabilidad(editForm.value)"
+              data-dismiss="modal"
+              class="btn btn-primary"
+            >
+            Grabar Cambios
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- Borrar -->
+
+<div
+  data-bs-toggle="modal" data-bs-target="#borrarModelLabel"
+  class="modal fade"
+  id="borrarHabilidadModal"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="borrarHabilidadModalLabel"
+  aria-hidden="true"
+
+>
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="borrarHabilidadModalLabel">
+          Borrar Habilidad
+        </h5>
+        <button
+          type="button"
+          class="close"
+          data-dismiss="modal"
+          aria-label="Close"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p style="color:black">
+          ¿Estas seguro de borrar
+          {{borrarHabilidad?.nombreSkill}}?
+        </p>
+        <div class="modal-footer">
+          <button
+            type="button"
+            class="btn btn-secondary"
+            data-dismiss="modal"
+          >
+            No
+          </button>
+          <button
+            type="button"
+            (click)="onBorrarHabilidad(borrarHabilidad!.idSkill)"
+            class="btn btn-danger"
+            data-dismiss="modal"
+          >
+            Si
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+

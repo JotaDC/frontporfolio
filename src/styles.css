@@ -1,1 +1,114 @@
-/* You can add global styles to this file, and also import other style files */
+
+.container-fluid{
+  background-color: black;
+
+}
+.encabezado{
+  background-color: black;
+}
+.encabezado .logoprogramar{
+  width: 30%;
+}
+.encabezado .logoministerio{
+  width: 50%;
+}
+.flotanteDerecha{
+  float: right;
+}
+.social{
+  float: right;
+  margin-top:5px;
+}
+.banner{
+
+  height: 300px;
+
+
+}
+.card{
+  background-color: #0f0f27;
+}
+.boton-menu{
+
+
+  margin-top: -60px;
+  padding-right:10px;
+}
+
+.nombre{
+  margin-left: 10px;
+  color:white;
+}
+.titulo{
+  margin-left: 10px;
+  color:white;
+}
+
+.foto-usuario{
+  border-radius: 50%;
+  width: 152px;
+  height: 152px;
+  margin-top: -80px;
+  padding-left:10px;
+
+
+}
+body{
+  color:white;
+}
+.progreso{
+
+  margin-left: 80px;
+  align-content:  center;
+}
+.inicioFlotante{
+  float:inline-start;
+
+}
+.finFlotante{
+  float:inline-end;
+
+}
+.cortarFlotante{
+  clear: both;
+}
+
+.login{
+  width: 50%;
+}
+/*
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+*/
+.modal-header{
+  background-color: seagreen;
+  color:white;
+}
+h5.modal-title{
+  font-size:25px;
+}
+#item{
+  background-color: #0f0f27;
+  border-radius: 15px;
+  border-color: seagreen ;
+  border-style:groove;
+  border-width: 1px;
+
+
+}
+#seccion{
+  background-color: #0f0f27;
+  border-radius: 0px;
+  border-color: seagreen ;
+  border-style:solid;
+  border-width: 5px;
+}
+#titulo-seccion{
+  background-color: #323286;
+}
+
+
+h1.card-title{
+  font-size:2rem;
+}
+

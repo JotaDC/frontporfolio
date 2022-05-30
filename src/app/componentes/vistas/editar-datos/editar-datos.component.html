@@ -1,0 +1,126 @@
+<div class="container-fluid">
+  <h1>Editar</h1>
+  <div class="row" >
+    <div class="col-md">
+        <div class="card bg-success text-white">
+          <div class="card-body">
+            <h4 class="card-title">Usuario</h4>
+            <p class="card-text"></p>
+            <form [formGroup]="form" (ngSubmit)="onEnviar($event)">
+              <!--NOMBRE-->
+              <div class="mb-3">
+                <label for="nombre" class="form-label">Nombre</label>
+                <input type="text" formControlName="nombre"
+                [ngClass]="{
+                  'is-invalid':Nombre?.errors && Nombre?.touched,
+                  'is-valid':!Nombre?.errors && Nombre?.touched}"
+                class="form-control" id="exampleInputUsuario" aria-describedby="usuarioHelp">
+                <div *ngIf="Nombre?.errors && Nombre?.touched">
+                  <p *ngIf="Nombre?.hasError('required')" class="text-danger">
+                    El Nombre es requerido.
+                  </p>
+                  <p *ngIf="Nombre?.hasError('usuario')" class="text-danger">
+                    El formato del Nombre debe ser válido.
+                  </p>
+                </div>
+              </div>
+              <!--APELLIDO-->
+              <div class="mb-3">
+                <label for="apellido" class="form-label">Apellido</label>
+                <input type="text" formControlName="apellido"
+                [ngClass]="{
+                  'is-invalid':Apellido?.errors && Apellido?.touched,
+                  'is-valid':!Apellido?.errors && Apellido?.touched}"
+                class="form-control" id="exampleInputPassword1">
+                <div *ngIf="Apellido?.errors && Apellido?.touched">
+                  <p *ngIf="Apellido?.hasError('required')" class="text-danger">
+                    El Apellido es requerido.
+                  </p>
+                  <p *ngIf="Apellido?.errors?.['minlength']" class="text-danger">
+                    El Apellido debe ser de 8 o mas caracteres.
+                  </p>
+                </div>
+              </div>
+              <!--TITULO-->
+              <div class="mb-3">
+                <label for="titulo" class="form-label">Titulo</label>
+                <input type="text" formControlName="titulo"
+                [ngClass]="{
+                  'is-invalid':Titulo?.errors && Titulo?.touched,
+                  'is-valid':!Titulo?.errors && Titulo?.touched}"
+                class="form-control" id="exampleInputUsuario" aria-describedby="usuarioHelp">
+                <div *ngIf="Titulo?.errors && Titulo?.touched">
+                  <p *ngIf="Titulo?.hasError('required')" class="text-danger">
+                    El Titulo es requerido.
+                  </p>
+                  <p *ngIf="Titulo?.hasError('titulo')" class="text-danger">
+                    El formato del Titulo debe ser válido.
+                  </p>
+                </div>
+              </div>
+              <!--DESCRIPCION-->
+              <div class="mb-3">
+                <label for="descripcion" class="form-label">Descripcion</label>
+                <input type="text" formControlName="titulo"
+                [ngClass]="{
+                  'is-invalid':Descripcion?.errors && Descripcion?.touched,
+                  'is-valid':!Descripcion?.errors && Descripcion?.touched}"
+                class="form-control" id="Descripcion" aria-describedby="descripcionHelp">
+                <div *ngIf="Descripcion?.errors && Descripcion?.touched">
+                  <p *ngIf="Descripcion?.hasError('required')" class="text-danger">
+                    El Descripcion es requerido.
+                  </p>
+                  <p *ngIf="Descripcion?.hasError('descripcion')" class="text-danger">
+                    El formato del Descripcion debe ser válido.
+                  </p>
+                </div>
+              </div>
+              <!--FOTO PERFIL-->
+              <div class="mb-3">
+                <label for="fotoPerfil" class="form-label">Foto del Perfil</label>
+                <input type="text" formControlName="fotoPerfil"
+                [ngClass]="{
+                  'is-invalid':FotoPerfil?.errors && FotoPerfil?.touched,
+                  'is-valid':!FotoPerfil?.errors && FotoPerfil?.touched}"
+                class="form-control" id="fotoPerfil" aria-describedby="fotoPerfilHelp">
+                <div *ngIf="FotoPerfil?.errors && FotoPerfil?.touched">
+                  <p *ngIf="FotoPerfil?.hasError('required')" class="text-danger">
+                    El FotoPerfil es requerido.
+                  </p>
+                  <p *ngIf="FotoPerfil?.hasError('fotoPerfil')" class="text-danger">
+                    El formato del FotoPerfil debe ser válido.
+                  </p>
+                </div>
+              </div>
+
+              <!--FOTO FONDO-->
+              <div class="mb-3">
+                <label for="fotoFondo" class="form-label">Imagen de Fondo</label>
+                <input type="text" formControlName="fotoFondo"
+                [ngClass]="{
+                  'is-invalid':FotoFondo?.errors && FotoFondo?.touched,
+                  'is-valid':!FotoFondo?.errors && FotoFondo?.touched}"
+                class="form-control" id="fotoFondo" aria-describedby="fotoFondoHelp">
+                <div *ngIf="FotoFondo?.errors && FotoFondo?.touched">
+                  <p *ngIf="FotoFondo?.hasError('required')" class="text-danger">
+                    El Foto del Fondo es requerido.
+                  </p>
+                  <p *ngIf="FotoFondo?.hasError('fotoFondo')" class="text-danger">
+                    El formato del Foto del Fondo debe ser válido.
+                  </p>
+                </div>
+              </div>
+              <button type="submit" class="btn btn-primary">Guardar</button>
+              <button [routerLink]="['/porfolio']"type="button" class="btn btn-primary">Cancelar</button>
+            </form>
+            <!--<a href="#" class="btn btn-primary">Entrar</a>-->
+
+          </div>
+        </div>
+    </div>
+
+
+  </div>
+</div>
+
+
